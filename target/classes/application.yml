@@ -10,13 +10,10 @@ spring:
 ###################  开发环境的profile  ###################
 ##########################################################
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/dev_flowable
+    url: jdbc:mysql://127.0.0.1:3306/dev_flowable?characterEncoding=utf8&useSSL=true
     username: root
     password: 3.1415926
     driver-class-name: com.mysql.jdbc.Driver
-    userSSL: true
-
-
 logging:
   level.root: info
   level.com.haiyang: debug
