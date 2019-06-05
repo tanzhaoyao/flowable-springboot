@@ -16,6 +16,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 报销demoController
@@ -53,18 +54,25 @@ public class ExpenseController {
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("Expense", map);
         return "提交成功.流程Id为：" + processInstance.getId();
     }
+    @RequestMapping(value = "test")
+    @ResponseBody
+   public String Test(){
 
+        return  "hello";
+   }
     /**
      * 获取审批管理列表
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String userId) {
+    public  HashMap<String,String> list(String userId) {
         List<Task> tasks = taskService.createTaskQuery().taskAssignee(userId).orderByTaskCreateTime().desc().list();
+        HashMap<String,String> map=new HashMap<String, String>();
         for (Task task : tasks) {
             System.out.println(task.toString());
+            map.put(task.getId(),task.getName());
         }
-        return tasks.toArray().toString();
+        return map;
     }
 
     /**
